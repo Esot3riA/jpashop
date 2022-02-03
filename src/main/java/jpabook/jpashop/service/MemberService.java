@@ -30,6 +30,12 @@ public class MemberService {
         return member.getId();
     }
 
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
+    }
+
     private void validateDuplicateMember(Member member) {
         List<Member> foundMembers = memberRepository.findByName(member.getName());
         if (!foundMembers.isEmpty()) {
@@ -44,5 +50,4 @@ public class MemberService {
     public Member findOne(Long id) {
         return memberRepository.findOne(id);
     }
-
 }
